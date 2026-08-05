@@ -161,9 +161,8 @@
   <!-- ============ DEMO VIDEO ============ -->
   <div class="demo">
     <div class="demo-frame">
-      <!-- ⚠️ WHEN YOUR RECORDING IS READY, DELETE THE DIV BELOW AND UNCOMMENT THIS:
-      <video src="demo.mp4" autoplay muted loop playsinline poster="demo-poster.jpg"></video>
-      -->
+      <!-- ⚠️ WHEN demo.mp4 IS READY: DELETE THE demo-ph DIV BELOW AND UNCOMMENT THE VIDEO TAG UNDER IT -->
+      <!--<video src="demo.mp4" autoplay muted loop playsinline></video>-->
       <div class="demo-ph">
         <b>[ DEMO VIDEO GOES HERE ]</b>
         15&ndash;25s screen recording &middot; see ASSET_GUIDE.md &sect;1<br />
@@ -229,7 +228,7 @@
     <h2>PROOF</h2>
     <p class="h2sub">Same artwork. Different physics.</p>
     <div class="ba-grid">
-      <!-- ⚠️ REPLACE EACH .ba-img DIV WITH: <img src="ba-1.jpg" alt="..." /> -->
+      <!-- ⚠️ SWAP EACH ba-img DIV FOR AN IMG TAG POINTING AT ba-1.jpg, ba-2.jpg ... -->
       <div class="ba">
         <div class="ba-img">[ BEFORE / AFTER 1 ]<br />TYPOGRAPHY POSTER</div>
         <div class="ba-lab"><b>35MM GRAIN</b> + THRESHOLD</div>
@@ -294,30 +293,22 @@
   </div>
 </section>
 
-<!-- ============ QUOTES ============ -->
-<!-- ⚠️ REPLACE WITH REAL BETA QUOTES — see ASSET_GUIDE.md §3.
-     If you only get one good quote, delete the other two blocks.
-     DELETE THIS WHOLE SECTION rather than shipping placeholder quotes. -->
-<section>
-  <div class="wrap">
-    <h2>FIELD NOTES</h2>
-    <p class="h2sub">From designers using it.</p>
-    <div class="quotes">
-      <div class="q">
-        <p>&ldquo;[ BETA QUOTE 1 &mdash; specific, names a real task ]&rdquo;</p>
-        <cite>@HANDLE · DISCIPLINE</cite>
-      </div>
-      <div class="q">
-        <p>&ldquo;[ BETA QUOTE 2 ]&rdquo;</p>
-        <cite>@HANDLE · DISCIPLINE</cite>
-      </div>
-      <div class="q">
-        <p>&ldquo;[ BETA QUOTE 3 ]&rdquo;</p>
-        <cite>@HANDLE · DISCIPLINE</cite>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- ============ FIELD NOTES (quotes) ============
+     Section removed until real beta quotes exist. To bring it back, paste this
+     inside the wrap div of a new <section>, then fill in the quote and handle:
+
+     <h2>FIELD NOTES</h2>
+     <p class="h2sub">From designers using it.</p>
+     <div class="quotes">
+       <div class="q">
+         <p>&ldquo;Quote goes here.&rdquo;</p>
+         <cite>@handle · discipline</cite>
+       </div>
+     </div>
+
+     The .q and .quotes CSS is still in the stylesheet, so it will style itself.
+     See ASSET_GUIDE.md section 3 for how to collect quotes worth using.
+============================================== -->
 
 <!-- ============ THE STUDIO ============ -->
 <section>
