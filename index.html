@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>GRAINSHIFT — Analog Texture Lab for Photoshop | 18 Studios Labs</title>
+<meta name="description" content="77 ways to destroy perfection. An analog texture lab for Photoshop built on real dithering, halftone and image-processing techniques — not a folder of overlays. Free. By 18 Studios Labs." />
+<link rel="icon" href="favicon.png" />
+<meta property="og:title" content="GRAINSHIFT — 77 ways to destroy perfection" />
+<meta property="og:description" content="An analog texture lab for Photoshop. Real dithering, halftone and degradation — applied as editable layers." />
+<meta property="og:image" content="monogram.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<style>
+  :root{
+    --bg:#0d0d0d; --panel:#161616; --line:#2e2e2e;
+    --text:#f2f2f2; --cream:#efe9dd; --muted:#9a9a9a; --accent:#7cfc6a;
+    --mono:"SF Mono",Consolas,"Courier New",monospace;
+    --serif:"Bodoni MT","Didot","Playfair Display",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--mono);
+       -webkit-font-smoothing:antialiased;line-height:1.65}
+  .wrap{max-width:940px;margin:0 auto;padding:0 24px}
+  a{color:inherit}
+  img{max-width:100%}
+
+  /* scanline texture over the whole page */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);opacity:.5}
+
+  /* ---------- HERO ---------- */
+  header{padding:70px 0 0;text-align:center}
+  .eyebrow{font-size:10px;letter-spacing:5px;color:var(--muted);margin-bottom:22px}
+  h1{font-family:var(--serif);font-style:italic;font-weight:700;font-size:clamp(46px,10vw,88px);
+     letter-spacing:2px;margin:0;line-height:.95;color:var(--cream)}
+  h1 .glyph{font-style:normal;font-size:.42em;color:var(--accent);vertical-align:middle;padding:0 10px}
+  .kicker{font-family:var(--serif);font-style:italic;font-size:clamp(19px,3.4vw,27px);
+          color:var(--accent);margin-top:18px;letter-spacing:.5px}
+  .tag{font-size:10px;letter-spacing:5px;color:var(--muted);margin-top:16px}
+  .lede{max-width:600px;margin:26px auto 0;color:var(--muted);font-size:14px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:32px}
+  .btn{display:inline-block;padding:14px 28px;border-radius:26px;text-decoration:none;
+       font-size:11px;letter-spacing:2px;font-weight:700;border:1px solid var(--accent);
+       background:var(--accent);color:#0d0d0d;transition:opacity .15s}
+  .btn.ghost{background:transparent;color:var(--accent)}
+  .btn:hover{opacity:.82}
+  .btn-note{font-size:10px;letter-spacing:2px;color:var(--muted);margin-top:14px}
+
+  /* ---------- DEMO VIDEO ---------- */
+  .demo{margin:52px auto 0;max-width:820px;padding:0 24px}
+  .demo-frame{position:relative;border:1px solid var(--line);border-radius:10px;
+              overflow:hidden;background:#000;aspect-ratio:16/9;
+              display:flex;align-items:center;justify-content:center}
+  .demo-frame video{width:100%;height:100%;object-fit:cover;display:block}
+  .demo-ph{text-align:center;color:var(--muted);font-size:11px;letter-spacing:2px;padding:24px}
+  .demo-ph b{display:block;color:var(--accent);font-size:13px;margin-bottom:10px}
+  .demo-cap{font-size:10px;letter-spacing:2px;color:var(--muted);text-align:center;margin-top:12px}
+
+  /* ---------- TERMINAL STRIP ---------- */
+  .term{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+        background:#080808;padding:15px 0;margin-top:58px}
+  .term .wrap{display:flex;gap:20px;flex-wrap:wrap;font-size:10.5px;color:var(--muted);letter-spacing:1px}
+  .term b{color:var(--accent);font-weight:700}
+
+  /* ---------- SECTIONS ---------- */
+  section{padding:66px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:11px;letter-spacing:4px;color:var(--accent);margin:0 0 10px;font-weight:700}
+  .h2sub{font-family:var(--serif);font-style:italic;font-size:clamp(24px,4.6vw,38px);
+         color:var(--cream);margin:0 0 30px;line-height:1.15}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px}
+  .card h3{margin:0 0 9px;font-size:12px;letter-spacing:1.5px;color:var(--accent)}
+  .card p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.6}
+
+  /* ---------- BEFORE / AFTER ---------- */
+  .ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .ba{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--panel)}
+  .ba-img{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;
+          background:#0a0a0a;color:#4a4a4a;font-size:10px;letter-spacing:2px;text-align:center;padding:16px}
+  .ba-lab{padding:11px 14px;font-size:9.5px;letter-spacing:1.5px;color:var(--muted);
+          border-top:1px solid var(--line)}
+  .ba-lab b{color:var(--accent);font-weight:700}
+
+  /* ---------- CATEGORIES ---------- */
+  .cats{display:flex;flex-wrap:wrap;gap:8px}
+  .cat{border:1px solid var(--line);border-radius:20px;padding:7px 15px;font-size:10.5px;
+       letter-spacing:1px;color:var(--muted);background:var(--panel)}
+  .cat b{color:var(--text);font-weight:700}
+
+  /* ---------- FEATURES ---------- */
+  ul.feat{list-style:none;padding:0;margin:0;display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
+  ul.feat li{font-size:12.5px;color:var(--muted);padding-left:20px;position:relative;line-height:1.6}
+  ul.feat li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
+  ul.feat b{color:var(--text)}
+
+  /* ---------- QUOTES ---------- */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .q{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
+     border-radius:0 8px 8px 0;padding:20px}
+  .q p{margin:0 0 12px;font-size:13px;color:var(--cream);font-style:italic;
+       font-family:var(--serif);line-height:1.5}
+  .q cite{font-size:10px;letter-spacing:1.5px;color:var(--muted);font-style:normal}
+
+  /* ---------- STUDIO ---------- */
+  .studio{display:flex;gap:34px;align-items:center;flex-wrap:wrap}
+  .studio img{width:120px;flex-shrink:0}
+  .studio-txt{flex:1;min-width:250px}
+  .studio-txt p{font-size:13px;color:var(--muted);margin:0 0 14px}
+
+  /* ---------- EMAIL ---------- */
+  .lab{text-align:center}
+  .lab form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .lab input{background:#080808;border:1px solid var(--line);border-radius:24px;
+             padding:13px 20px;color:var(--text);font-family:var(--mono);font-size:12px;
+             min-width:270px;outline:none}
+  .lab input:focus{border-color:var(--accent)}
+  .lab button{padding:13px 28px;border-radius:24px;border:1px solid var(--accent);
+              background:var(--accent);color:#0d0d0d;font-family:var(--mono);font-size:11px;
+              letter-spacing:2px;font-weight:700;cursor:pointer}
+  .lab button:hover{opacity:.82}
+  .lab .fine{font-size:10px;letter-spacing:1px;color:var(--muted);margin-top:16px}
+
+  /* ---------- COMMUNITY ---------- */
+  .hash{font-family:var(--serif);font-style:italic;font-size:clamp(30px,6vw,52px);
+        color:var(--accent);margin:0 0 16px}
+
+  /* ---------- FOOTER ---------- */
+  footer{padding:54px 0 72px;text-align:center;color:var(--muted);font-size:11px}
+  .sig{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--cream);
+       letter-spacing:1px;margin-bottom:6px}
+  .links{margin:24px 0 26px;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+  .links a{font-size:10.5px;letter-spacing:2px;text-decoration:none;color:var(--muted);
+           border-bottom:1px solid var(--line);padding-bottom:3px}
+  .links a:hover{color:var(--accent);border-color:var(--accent)}
+  .fine{font-size:10px;letter-spacing:1px;opacity:.6}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header>
+  <div class="wrap">
+    <div class="eyebrow">18 STUDIOS LABS</div>
+    <h1>GRAIN<span class="glyph">&#10022;</span>SHIFT</h1>
+    <div class="kicker">77 ways to destroy perfection.</div>
+    <div class="tag">ANALOG TEXTURE LAB &nbsp;·&nbsp; FOR ADOBE PHOTOSHOP</div>
+    <p class="lede">
+      Select a layer. Pick an effect. It lands as an editable layer with its blend mode
+      and adjustments already prepared. No hunting through texture folders. No guessing
+      which blend mode works.
+    </p>
+    <div class="cta">
+      <!-- ⚠️ REPLACE href WITH YOUR ADOBE MARKETPLACE URL ONCE APPROVED -->
+      <a class="btn" href="#">DOWNLOAD FREE ON ADOBE MARKETPLACE</a>
+      <a class="btn ghost" href="#how">HOW IT WORKS</a>
+    </div>
+    <div class="btn-note">FREE · PHOTOSHOP 24.2+ · WINDOWS &amp; MACOS</div>
+  </div>
+
+  <!-- ============ DEMO VIDEO ============ -->
+  <div class="demo">
+    <div class="demo-frame">
+      <!-- ⚠️ WHEN YOUR RECORDING IS READY, DELETE THE DIV BELOW AND UNCOMMENT THIS:
+      <video src="demo.mp4" autoplay muted loop playsinline poster="demo-poster.jpg"></video>
+      -->
+      <div class="demo-ph">
+        <b>[ DEMO VIDEO GOES HERE ]</b>
+        15&ndash;25s screen recording &middot; see ASSET_GUIDE.md &sect;1<br />
+        Save as <code>demo.mp4</code> in this folder
+      </div>
+    </div>
+    <div class="demo-cap">GRAINSHIFT RUNNING INSIDE PHOTOSHOP &mdash; REAL TIME, NO SPEED-UP</div>
+  </div>
+</header>
+
+<!-- ============ STATS ============ -->
+<div class="term">
+  <div class="wrap">
+    <span>&gt; effects <b>77</b></span>
+    <span>&gt; categories <b>12</b></span>
+    <span>&gt; themes <b>16</b></span>
+    <span>&gt; network access <b>NONE</b></span>
+    <span>&gt; price <b>FREE</b></span>
+  </div>
+</div>
+
+<!-- ============ NOT A TEXTURE PACK ============ -->
+<section>
+  <div class="wrap">
+    <h2>THE DIFFERENCE</h2>
+    <p class="h2sub">This is not another texture pack.</p>
+    <div class="grid">
+      <div class="card">
+        <h3>MOST "ANALOG" EFFECTS</h3>
+        <p>Are just images placed over your work. A JPEG of grain, set to Overlay, hoping
+           it reads. Static. Non-reactive. Same result every time.</p>
+      </div>
+      <div class="card">
+        <h3>GRAINSHIFT</h3>
+        <p>Treats texture as a system &mdash; dither, halftone, levels, threshold, grain and
+           controlled degradation, computed against your actual document.</p>
+      </div>
+      <div class="card">
+        <h3>WHY IT MATTERS</h3>
+        <p>You get control over <em>how</em> dirty it becomes, not just a preset someone
+           else decided on. Every effect stays editable after it lands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="wrap">
+    <h2>HOW IT WORKS</h2>
+    <p class="h2sub">Three steps. Under a minute.</p>
+    <div class="grid">
+      <div class="card"><h3>01 · SELECT</h3><p>Pick any layer. The panel shows exactly what it's targeting. Your original art is never modified.</p></div>
+      <div class="card"><h3>02 · APPLY</h3><p>Click a thumbnail. The effect lands above your layer with the right blend mode and opacity already set.</p></div>
+      <div class="card"><h3>03 · ADJUST</h3><p>Live, non-destructive controls for opacity, brightness, contrast, curve, levels and threshold. Stack as many effects as you want.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BEFORE / AFTER ============ -->
+<section>
+  <div class="wrap">
+    <h2>PROOF</h2>
+    <p class="h2sub">Same artwork. Different physics.</p>
+    <div class="ba-grid">
+      <!-- ⚠️ REPLACE EACH .ba-img DIV WITH: <img src="ba-1.jpg" alt="..." /> -->
+      <div class="ba">
+        <div class="ba-img">[ BEFORE / AFTER 1 ]<br />TYPOGRAPHY POSTER</div>
+        <div class="ba-lab"><b>35MM GRAIN</b> + THRESHOLD</div>
+      </div>
+      <div class="ba">
+        <div class="ba-img">[ BEFORE / AFTER 2 ]<br />ALBUM COVER</div>
+        <div class="ba-lab"><b>FLOYD-STEINBERG DITHER</b></div>
+      </div>
+      <div class="ba">
+        <div class="ba-img">[ BEFORE / AFTER 3 ]<br />FASHION GRAPHIC</div>
+        <div class="ba-lab"><b>PLASTISOL DEGRADATION</b> + LEVELS</div>
+      </div>
+      <div class="ba">
+        <div class="ba-img">[ BEFORE / AFTER 4 ]<br />PHOTOGRAPHY</div>
+        <div class="ba-lab"><b>XEROX</b> + HALFTONE 45 LPI</div>
+      </div>
+      <div class="ba">
+        <div class="ba-img">[ BEFORE / AFTER 5 ]<br />CLEAN CORPORATE &rarr; PHYSICAL</div>
+        <div class="ba-lab"><b>DARK WORLD</b> + CURVE</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIBRARY ============ -->
+<section>
+  <div class="wrap">
+    <h2>THE LIBRARY</h2>
+    <p class="h2sub">77 effects. 12 categories.</p>
+    <div class="cats">
+      <span class="cat"><b>FILM &amp; GRAIN</b> · 9</span>
+      <span class="cat"><b>DARK WORLD</b> · 10</span>
+      <span class="cat"><b>TEXTURE OVERLAYS</b> · 9</span>
+      <span class="cat"><b>PLASTISOL DEGRADATION</b> · 4</span>
+      <span class="cat"><b>PRINT &amp; HALFTONE</b> · 8</span>
+      <span class="cat"><b>INK &amp; STAMP</b> · 4</span>
+      <span class="cat"><b>XEROX &amp; PHOTOCOPY</b> · 5</span>
+      <span class="cat"><b>DITHER &amp; GLITCH</b> · 8</span>
+      <span class="cat"><b>MODULATION</b> · 6</span>
+      <span class="cat"><b>SIGNAL &amp; CIRCUIT</b> · 6</span>
+      <span class="cat"><b>DISTRESS</b> · 6</span>
+      <span class="cat"><b>STUDIO SCANS</b> · 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section>
+  <div class="wrap">
+    <h2>BUILT FOR REAL WORK</h2>
+    <p class="h2sub">Built for designers who zoom in.</p>
+    <ul class="feat">
+      <li><b>Real dithering algorithms.</b> Floyd-Steinberg, Atkinson and Bayer computed mathematically &mdash; not overlay images.</li>
+      <li><b>True-LPI halftones</b> calculated from your document resolution, so print output matches intent.</li>
+      <li><b>Applied as editable layers</b> with blend modes and adjustments already prepared.</li>
+      <li><b>Smart Object workflow</b> with a dedicated compositing mode that opens your art in its own document.</li>
+      <li><b>Color separation tools</b> for spot-color and screen-print prep.</li>
+      <li><b>16 interface themes</b> plus a custom color editor.</li>
+      <li><b>Stack multiple effects</b> and keep every one of them adjustable.</li>
+      <li><b>Private by design.</b> No internet access, no tracking, no data collection.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ QUOTES ============ -->
+<!-- ⚠️ REPLACE WITH REAL BETA QUOTES — see ASSET_GUIDE.md §3.
+     If you only get one good quote, delete the other two blocks.
+     DELETE THIS WHOLE SECTION rather than shipping placeholder quotes. -->
+<section>
+  <div class="wrap">
+    <h2>FIELD NOTES</h2>
+    <p class="h2sub">From designers using it.</p>
+    <div class="quotes">
+      <div class="q">
+        <p>&ldquo;[ BETA QUOTE 1 &mdash; specific, names a real task ]&rdquo;</p>
+        <cite>@HANDLE · DISCIPLINE</cite>
+      </div>
+      <div class="q">
+        <p>&ldquo;[ BETA QUOTE 2 ]&rdquo;</p>
+        <cite>@HANDLE · DISCIPLINE</cite>
+      </div>
+      <div class="q">
+        <p>&ldquo;[ BETA QUOTE 3 ]&rdquo;</p>
+        <cite>@HANDLE · DISCIPLINE</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE STUDIO ============ -->
+<section>
+  <div class="wrap">
+    <h2>THE STUDIO</h2>
+    <div class="studio">
+      <img src="monogram.png" alt="18 Studios Labs monogram" />
+      <div class="studio-txt">
+        <p class="h2sub" style="margin-bottom:16px">Make digital feel physical.</p>
+        <p>18 Studios Labs is an independent creative technology studio focused on
+           experimental tools for digital artists. GRAINSHIFT is our first release:
+           an analog texture engine created inside Photoshop, for Photoshop designers.</p>
+        <p>Founded and built by Jordan &ldquo;SXEIGHTEEN&rdquo; Wright.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LAB NOTES / EMAIL ============ -->
+<section class="lab">
+  <div class="wrap">
+    <h2>LAB NOTES</h2>
+    <p class="h2sub">Plugin updates, new experiments, early releases.</p>
+    <!-- ⚠️ PASTE YOUR BUTTONDOWN FORM ACTION URL BELOW — see ASSET_GUIDE.md §5
+         Buttondown → Settings → Embedding → copy the form action -->
+    <form action="PASTE_YOUR_FORM_ACTION_URL_HERE" method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@email.com" required />
+      <button type="submit">ENTER THE LAB</button>
+    </form>
+    <div class="fine">NO SPAM. ONLY WHEN THERE'S SOMETHING REAL. UNSUBSCRIBE ANY TIME.</div>
+  </div>
+</section>
+
+<!-- ============ COMMUNITY ============ -->
+<section>
+  <div class="wrap" style="text-align:center">
+    <h2>THE FIRST EXPERIMENT</h2>
+    <div class="hash">#GrainShifted</div>
+    <p style="font-size:13px;color:var(--muted);max-width:520px;margin:0 auto 26px">
+      Make one design with GRAINSHIFT and tag <b style="color:var(--text)">@18studioslabs</b>.
+      Featured work gets a homepage spot, early access to the next update, or a custom
+      effect named after your concept.
+    </p>
+    <div class="cta">
+      <!-- ⚠️ ADD YOUR DISCORD INVITE ONCE THE SERVER OPENS (WEEK 3) -->
+      <a class="btn ghost" href="#">JOIN THE DISCORD</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="sig">18 Studios Labs</div>
+    <div class="fine">FOUNDED &amp; CREATED BY JORDAN &ldquo;SXEIGHTEEN&rdquo; WRIGHT</div>
+    <div class="links">
+      <!-- ⚠️ FILL THESE IN -->
+      <a href="mailto:sixeighteenn@gmail.com">CONTACT</a>
+      <a href="#">INSTAGRAM</a>
+      <a href="#">X</a>
+      <a href="#">DISCORD</a>
+      <a href="privacy.html">PRIVACY</a>
+    </div>
+    <div class="fine">&copy; 2026 18 Studios Labs. Adobe and Photoshop are trademarks of Adobe Inc.</div>
+  </div>
+</footer>
+
+</body>
+</html>

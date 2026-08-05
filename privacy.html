@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy — GRAINSHIFT | 18 Studios Labs</title>
+<link rel="icon" href="favicon.png" />
+<style>
+  :root{
+    --bg:#0d0d0d; --panel:#161616; --line:#2e2e2e;
+    --text:#f2f2f2; --cream:#efe9dd; --muted:#9a9a9a; --accent:#7cfc6a;
+    --mono:"SF Mono",Consolas,"Courier New",monospace;
+    --serif:"Bodoni MT","Didot","Playfair Display",Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--mono);line-height:1.7;
+       -webkit-font-smoothing:antialiased}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0 1px,transparent 1px 3px);opacity:.5}
+  .wrap{max-width:680px;margin:0 auto;padding:70px 24px 90px}
+  a{color:var(--accent)}
+  .back{font-size:10px;letter-spacing:2px;text-decoration:none;color:var(--muted);display:inline-block;margin-bottom:36px}
+  .back:hover{color:var(--accent)}
+  h1{font-family:var(--serif);font-style:italic;font-size:42px;color:var(--cream);margin:0 0 8px;line-height:1}
+  .sub{font-size:10px;letter-spacing:4px;color:var(--muted);margin-bottom:44px}
+  h2{font-size:11px;letter-spacing:3px;color:var(--accent);margin:40px 0 12px}
+  p{font-size:13.5px;color:var(--muted);margin:0 0 16px}
+  strong{color:var(--text)}
+  ul{padding-left:20px;margin:0 0 16px}
+  li{font-size:13.5px;color:var(--muted);margin-bottom:7px}
+  code{background:var(--panel);border:1px solid var(--line);border-radius:4px;
+       padding:2px 6px;font-size:12px;color:var(--cream)}
+  .box{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
+       border-radius:0 8px 8px 0;padding:20px;margin:0 0 20px}
+  .box p{margin:0;color:var(--cream)}
+  footer{border-top:1px solid var(--line);margin-top:56px;padding-top:26px;
+         font-size:10px;letter-spacing:1px;color:var(--muted);opacity:.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">&larr; BACK</a>
+
+  <h1>Privacy</h1>
+  <div class="sub">GRAINSHIFT &nbsp;·&nbsp; 18 STUDIOS LABS</div>
+
+  <div class="box">
+    <p><strong>The short version: the plugin collects nothing and never connects to the internet.</strong>
+       There is no analytics, no telemetry, no account, and no tracking of any kind.</p>
+  </div>
+
+  <h2>THE PLUGIN</h2>
+  <p>GRAINSHIFT requests <strong>no network permission</strong> in its manifest. It cannot
+     make outbound requests, because Adobe's plugin sandbox does not grant it the ability to.
+     This is verifiable &mdash; the permission simply isn't declared.</p>
+
+  <p>The only data GRAINSHIFT writes is <strong>three small preference files</strong>, stored in
+     its own sandboxed folder on your machine and never transmitted anywhere:</p>
+  <ul>
+    <li><code>theme.txt</code> &mdash; which interface theme you picked</li>
+    <li><code>customcolors.txt</code> &mdash; your custom theme colors, if you set any</li>
+    <li><code>welcomed.txt</code> &mdash; whether you've seen the welcome screen</li>
+  </ul>
+
+  <p>That's the complete list. There are no exceptions. Your artwork, your documents, and your
+     usage of the plugin never leave your computer.</p>
+
+  <h2>THIS WEBSITE</h2>
+  <p>If you enter your email address in the Lab Notes form, it's stored by our email provider
+     purely to send you occasional updates about GRAINSHIFT and future 18 Studios Labs
+     releases. We don't sell it, share it, or use it for anything else. Every email includes
+     an unsubscribe link, and unsubscribing removes you immediately.</p>
+
+  <p>Basic, anonymous visit counts may be recorded by our web host. No cookies are set for
+     advertising or cross-site tracking.</p>
+
+  <h2>DOWNLOADS</h2>
+  <p>GRAINSHIFT is distributed through the Adobe Creative Cloud Marketplace. Adobe handles the
+     download and any associated account data under
+     <a href="https://www.adobe.com/privacy/policy.html">Adobe's own privacy policy</a>.
+     We receive only aggregate, anonymous download counts &mdash; no personal information about
+     who installed it.</p>
+
+  <h2>QUESTIONS</h2>
+  <p>Email <a href="mailto:sixeighteenn@gmail.com">sixeighteenn@gmail.com</a> and you'll get a
+     real answer from a real person.</p>
+
+  <footer>
+    LAST UPDATED AUGUST 2026 &nbsp;·&nbsp; &copy; 2026 18 STUDIOS LABS<br />
+    ADOBE AND PHOTOSHOP ARE TRADEMARKS OF ADOBE INC.
+  </footer>
+</div>
+</body>
+</html>
