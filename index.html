@@ -94,6 +94,14 @@
   ul.feat li::before{content:"▸";position:absolute;left:0;color:var(--accent)}
   ul.feat b{color:var(--text)}
 
+  /* ---------- QUOTES ---------- */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .q{background:var(--panel);border:1px solid var(--line);border-left:2px solid var(--accent);
+     border-radius:0 8px 8px 0;padding:20px}
+  .q p{margin:0 0 12px;font-size:13px;color:var(--cream);font-style:italic;
+       font-family:var(--serif);line-height:1.5}
+  .q cite{font-size:10px;letter-spacing:1.5px;color:var(--muted);font-style:normal}
+
   /* ---------- STUDIO ---------- */
   .studio{display:flex;gap:34px;align-items:center;flex-wrap:wrap}
   .studio img{width:120px;flex-shrink:0}
@@ -153,15 +161,10 @@
   <!-- ============ DEMO VIDEO ============ -->
   <div class="demo">
     <div class="demo-frame">
-      <!-- ⚠️ WHEN demo.mp4 IS READY: DELETE THE demo-ph DIV BELOW AND UNCOMMENT THE VIDEO TAG UNDER IT -->
-      <!--<video src="demo.mp4" autoplay muted loop playsinline></video>-->
-      <div class="demo-ph">
-        <b>[ DEMO VIDEO GOES HERE ]</b>
-        15&ndash;25s screen recording &middot; see ASSET_GUIDE.md &sect;1<br />
-        Save as <code>demo.mp4</code> in this folder
-      </div>
+      <video src="demo.mp4" poster="demo-poster.jpg" controls preload="metadata"
+             playsinline width="1280" height="720"></video>
     </div>
-    <div class="demo-cap">GRAINSHIFT RUNNING INSIDE PHOTOSHOP &mdash; REAL TIME, NO SPEED-UP</div>
+    <div class="demo-cap">FULL WALKTHROUGH &mdash; 2:43 &middot; SOUND ON</div>
   </div>
 </header>
 
